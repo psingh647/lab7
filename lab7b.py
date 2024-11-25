@@ -43,3 +43,21 @@ def valid_time(t):
         return False
     return True
 
+def change_time(time, seconds):
+    """Modify the time object based on the number of seconds passed."""
+    time.second += seconds
+    # Normalize seconds to be positive, adjust minutes and hours accordingly
+    while time.second >= 60:
+        time.second -= 60
+        time.minute += 1
+    while time.minute >= 60:
+        time.minute -= 60
+        time.hour += 1
+    while time.second < 0:
+        time.second += 60
+        time.minute -= 1
+    while time.minute < 0:
+        time.minute += 60
+        time.hour -= 1
+    # Adjust hour to wrap correctly within 24-hour format
+    time.hour = time.hour % 24
